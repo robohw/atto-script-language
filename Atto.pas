@@ -21,6 +21,7 @@ var
   Tokens  : TStringArray;
   Labels  : array of TLabel;
   Vars    : array['A'..'Z'] of LongInt;
+  i       : integer;
   LineNum : word = 0;
   Stack   : word = 0;                  // PSEUDO stack for RET-urn
   Trace   : Boolean = False;
@@ -32,8 +33,6 @@ begin
 end;
 
 procedure SetLabelAddr(const Name: string; Addr: Byte);
-var
-  i: Integer;
 begin
   for i := 1 to High(Labels) do
     if Labels[i].Name = Name then Error('Label ' + Name + ' already exists.');
@@ -43,8 +42,6 @@ begin
 end;
 
 function GetLabelAddr(const Name: string): Byte;
-var
-  i: Integer;
 begin
   GetLabelAddr := 0;
   for i := 1 to High(Labels) do
@@ -71,9 +68,7 @@ begin
   if Tokens[n+1][1] = '+' then Vars[Tokens[n][1]] := GetValue(n) + 1;
   if Tokens[n+1][1] = '-' then Vars[Tokens[n][1]] := GetValue(n) - 1;  
   end  
-
   else  
-
   case Length(Tokens)-1 of
     2, 6: Vars[Tokens[n][1]] := GetValue(Length(Tokens)-1);
     4, 8: begin
@@ -157,8 +152,6 @@ begin
 end;
 
 procedure PrintState;
-var
-  i: Integer;
 begin
   Writeln;
   Writeln('----------- Code:');
