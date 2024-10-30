@@ -1,0 +1,11 @@
+; a simple loop with LineFeed 
+; ---------------------------
+
+TRC
+T = 10
+B = 0
+.LOOP
+B + 
+PRN B 
+PRN T
+IF B < 5 JMP .LOOP

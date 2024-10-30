@@ -1,0 +1,14 @@
+; FIBONACCI (sample code)
+; -----------------------
+
+TRC
+A = 0
+B = A + 1
+T = 10
+.for
+C = B
+B = A + B
+A = C
+PRN B
+PRN T
+IF A < 50 JMP .for 
