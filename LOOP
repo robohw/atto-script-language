@@ -1,10 +1,12 @@
 ; a simple loop with LineFeed 
+; B + equal B = B + 1
 ; ---------------------------
 
-TRC
-T = 10
+TRC                 ; trace turn ON
 B = 0
-.LOOP
-B + 
-PRN B T
+T = 10              ; LineFeed (ASCII)
+
+.LOOP               ; LOOP label
+ B + 
+ PRN B T
 IF B < 5 JMP .LOOP
