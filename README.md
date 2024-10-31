@@ -1,4 +1,4 @@
-# A working Interpreter in eight functions/procedures and the main!  #
+## A working Interpreter in eight functions/procedures and the main!  ##
 
 1 procedure Error(const Msg: string);   
 2 procedure SetLabelAddr(const Name: string; Addr: Byte);   
@@ -19,7 +19,7 @@ LogicOps: < > # =
 compile it with freepascal: fpc atto.pas   
   
 type: 
-# atto.exe < FIBONACCI > FIBONACCI.OUT #    
+### atto.exe < FIBONACCI > FIBONACCI.OUT ###    
   
 analise the content of FIBONACCI.OUT  
 
