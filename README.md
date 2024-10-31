@@ -1,4 +1,4 @@
-### A working Interpreter with tracer in eight functions/procedures and the main!  ###
+### A working Interpreter (with tracer) in eight functions/procedures and the main!  ###
 
 1 procedure Error(const Msg: string);   
 2 procedure SetLabelAddr(const Name: string; Addr: Byte);   
@@ -23,6 +23,8 @@ type:
 ### atto.exe < FIBONACCI > FIBONACCI.OUT ###    
   
 analise the content of FIBONACCI.OUT  
+
+![](atto_logoo.gif)
 
 
 
