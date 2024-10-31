@@ -133,10 +133,10 @@ begin
   while not Eof(Input) do
   begin
     ReadLn(Line);
-    Line := Trim(UpperCase(Line));
+    Line := UpperCase(Trim(Copy(Line, 1, Pos(';', Line + ';') - 1))); // Comment filter
     if (Length(Line) > 0) and (line[1] <> ';') then
     begin
-      if (lineNum = 0) and (line = 'TRC') then trace := true
+      if (line = 'TRC') then trace := true
       else
       if (Line[1] = '.') then begin SetLabelAddr(Line, LineNum+1); end
       else
