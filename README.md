@@ -11,9 +11,9 @@
 9 main  
   
     
-Keywords: if, jmp, prn, ret  
-Math Ops: + - * / %  
-LogicOps: < > # =  
+Keywords: if, jmp, prn, ret, + TRC (means TRACE)  
+Math  Operators: + - * / %  
+Logic Operators: < > # =  
   
   
 compile it with freepascal: 
@@ -24,6 +24,7 @@ type:
   
 analise the content of FIBONACCI.OUT  
 
+-------------------------------------------
 ![](atto_logoo.gif)
 
 
