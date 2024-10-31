@@ -4,22 +4,13 @@ Hello World
 2 T = 101
 3 U = 108
 4 V = 111
-5 PRN S
-6 PRN T
-7 PRN U
-8 PRN U
-9 PRN V
-10 W = 87
-11 X = 111
-12 Y = 114
-13 Z = 100
-14 S = 32
-15 PRN S
-16 PRN W
-17 PRN X
-18 PRN Y
-19 PRN U
-20 PRN Z
+5 PRN S T U U V
+6 W = 87
+7 X = 111
+8 Y = 114
+9 Z = 100
+10 S = 32
+11 PRN S W X Y U Z
 
 ----------- Variables (A..Z):
 A 0
@@ -39,7 +30,7 @@ N 0
 O 0
 P 0
 Q 0
-R 101
+R 99
 S 32
 T 101
 U 108

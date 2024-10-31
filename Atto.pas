@@ -1,11 +1,10 @@
-program Atto; // last 24.08.04
-
+program Atto; // 2024.08.04
 { Keywords: if, jmp, prn, ret
   Math Ops: +  -  *  /  %
   LogicOps: <  >  #  =
  
  compile it with freepascal: fpc atto.pas 
- type: atto.exe < FIBONACCI > FIBONACCI.OUT [press ENTER]
+ type: atto.exe <FIBONACCI > FIBONACCI.OUT
  analise the content of FIBONACCI.OUT  }
 
 uses SysUtils, StrUtils;
@@ -72,7 +71,7 @@ begin
   case Length(Tokens)-1 of
     2, 6: Vars[Tokens[n][1]] := GetValue(Length(Tokens)-1);
     4, 8: begin
-           case Tokens[Length(Tokens) - 2][1] of
+           case Tokens[Length(Tokens)-2][1] of
              '+': Vars[Tokens[n][1]] := GetValue(Length(Tokens)-3) + GetValue(Length(Tokens)-1);   
              '-': Vars[Tokens[n][1]] := GetValue(Length(Tokens)-3) - GetValue(Length(Tokens)-1);
              '*': Vars[Tokens[n][1]] := GetValue(Length(Tokens)-3) * GetValue(Length(Tokens)-1);
@@ -82,6 +81,13 @@ begin
          end;
   else Error('in expression');
   end;
+end;
+
+procedure printer(n: byte); 
+begin
+ for i := n to High(tokens) do
+  if (Tokens[i][1] in ['A'..'R']) then Write(Vars[Tokens[i][1]]) else 
+    Write(Chr(Vars[Tokens[i][1]]));
 end;
 
 procedure ExecuteMe;
@@ -99,25 +105,17 @@ begin
                 (Tokens[2][1] = '#') and (GetValue(1) <>GetValue(3)) or
                 (Tokens[2][1] = '=') and (GetValue(1) = GetValue(3)) then
                 case Tokens[4] of
-                 'JMP': begin
-                          Stack := linenum;  
-                          LineNum := GetLabelAddr(Tokens[5]);
-                        end;
-                 'PRN': if (Tokens[5][1] in ['A'..'R']) then Write(Vars[Tokens[5][1]]) else
-               Write(Chr(Vars[Tokens[5][1]]));
+                 'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[5]); end;
+                 'PRN': printer(5);
                 else SetValue(4);
                 end; // case
              end;
-      'JMP': begin
-               Stack := linenum;   
-               LineNum := GetLabelAddr(Tokens[1]);
-             end;
+      'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[1]); end;
       'RET': begin
                if Length(Tokens[1]) < 2 then Error('No way to RETURN');
                LineNum := Stack;
              end;
-      'PRN': if (Tokens[1][1] in ['A'..'R']) then Write(Vars[Tokens[1][1]]) else
-               Write(Chr(Vars[Tokens[1][1]]));
+      'PRN': Printer(1);
     else SetValue(0);
     end; // case
   end; // while
@@ -128,7 +126,7 @@ var
   Line: string;
 begin
   Randomize;
-  Vars['R'] := 100;
+  Vars['R'] := 99;
   SetLength(Code,1);   
   SetLength(Labels,1);
 
@@ -153,18 +151,15 @@ end;
 
 procedure PrintState;
 begin
-  Writeln;
-  Writeln('----------- Code:');
+  Writeln;  Writeln('----------- Code:');
   for i := 1 to High(Code) do Writeln(i, ' ', Code[i]);
   if Length(Labels) > 1 then
   begin
-    Writeln;
-    Writeln('----------- Label(s):');
+    Writeln; Writeln('----------- Label(s):');
     for i := 1 to High(Labels) do
       Writeln(Labels[i].Name, #9, Labels[i].Addr);
   end;
-  Writeln;
-  Writeln('----------- Variables (A..Z):');
+  Writeln; Writeln('----------- Variables (A..Z):');
   for i := 0 to 25 do Writeln(Chr(i + 65), ' ', Vars[Chr(i + 65)]);
 end;
 

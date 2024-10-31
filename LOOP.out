@@ -8,9 +8,8 @@
 1 T = 10
 2 B = 0
 3 B +
-4 PRN B
-5 PRN T
-6 IF B < 5 JMP .LOOP
+4 PRN B T
+5 IF B < 5 JMP .LOOP
 
 ----------- Label(s):
 .LOOP	3
@@ -33,7 +32,7 @@ N 0
 O 0
 P 0
 Q 0
-R 100
+R 99
 S 0
 T 10
 U 0

@@ -6,6 +6,5 @@ T = 10
 B = 0
 .LOOP
 B + 
-PRN B 
-PRN T
+PRN B T
 IF B < 5 JMP .LOOP
