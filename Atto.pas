@@ -28,7 +28,7 @@ var
 procedure Error(const Msg: string);
 begin
   Writeln('ERROR: ', Msg);
-  Writeln(code[lineNum-1]); Halt(1);
+  Writeln(linenum-1,' ',code[lineNum-1]); Halt(1);
 end;
 
 procedure SetLabelAddr(const Name: string; Addr: Byte);
@@ -60,7 +60,7 @@ end;
 
 procedure SetValue(n: byte);
 begin
-  if (Tokens[n][1] in ['A'..'Z']) = false then Error('invalid var ID: '+Tokens[n]);
+  if not (Tokens[n][1] in ['A'..'Z']) or (length(tokens[n]) > 1) then Error('invalid var ID: '+Tokens[n]);
 
   if (Tokens[n+1][1] in ['+','-']) then
   begin
@@ -83,8 +83,9 @@ begin
   end;
 end;
 
-procedure printer(n: byte); 
+procedure Printer(n: byte); 
 begin
+  if not (Tokens[n][1] in ['A'..'Z']) or (length(tokens[n]) > 1) then Error('invalid var ID: '+Tokens[n]);
  for i := n to High(tokens) do
   if (Tokens[i][1] in ['A'..'R']) then Write(Vars[Tokens[i][1]]) else 
     Write(Chr(Vars[Tokens[i][1]]));
@@ -106,13 +107,13 @@ begin
                 (Tokens[2][1] = '=') and (GetValue(1) = GetValue(3)) then
                 case Tokens[4] of
                  'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[5]); end;
-                 'PRN': printer(5);
+                 'PRN': Printer(5);
                 else SetValue(4);
                 end; // case
              end;
       'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[1]); end;
       'RET': begin
-               if Length(Tokens[1]) < 2 then Error('No way to RETURN');
+               if (stack = 0) then Error('No way to RETURN');
                LineNum := Stack;
              end;
       'PRN': Printer(1);
