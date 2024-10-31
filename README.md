@@ -16,7 +16,8 @@ Math Ops: + - * / %
 LogicOps: < > # =  
   
   
-compile it with freepascal: ### fpc atto.pas ###   
+compile it with freepascal: 
+### fpc atto.pas ###   
   
 type: 
 ### atto.exe < FIBONACCI > FIBONACCI.OUT ###    
