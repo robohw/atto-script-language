@@ -16,9 +16,8 @@
 4 C = B
 5 B = A + B
 6 A = C
-7 PRN B
-8 PRN T
-9 IF A < 50 JMP .FOR
+7 PRN B T
+8 IF A < 50 JMP .FOR
 
 ----------- Label(s):
 .FOR	4
@@ -41,7 +40,7 @@ N 0
 O 0
 P 0
 Q 0
-R 101
+R 99
 S 0
 T 10
 U 0

@@ -9,6 +9,5 @@ T = 10
 C = B
 B = A + B
 A = C
-PRN B
-PRN T
+PRN B T
 IF A < 50 JMP .for 
