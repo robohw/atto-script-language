@@ -1,0 +1,29 @@
+; hello world
+; -----------
+
+TRC 
+
+S = 72                
+T = 101               
+U = 108               
+V = 111               
+
+PRN S 
+PRN T 
+PRN U 
+PRN U 
+PRN V         
+
+W = 87                
+X = 111               
+Y = 114               
+Z = 100               
+S = 32 
+
+PRN S 
+PRN W 
+PRN X 
+PRN Y 
+PRN U 
+PRN Z         
+

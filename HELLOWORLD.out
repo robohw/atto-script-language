@@ -1,0 +1,50 @@
+Hello World
+----------- Code:
+1 S = 72
+2 T = 101
+3 U = 108
+4 V = 111
+5 PRN S
+6 PRN T
+7 PRN U
+8 PRN U
+9 PRN V
+10 W = 87
+11 X = 111
+12 Y = 114
+13 Z = 100
+14 S = 32
+15 PRN S
+16 PRN W
+17 PRN X
+18 PRN Y
+19 PRN U
+20 PRN Z
+
+----------- Variables (A..Z):
+A 0
+B 0
+C 0
+D 0
+E 0
+F 0
+G 0
+H 0
+I 0
+J 0
+K 0
+L 0
+M 0
+N 0
+O 0
+P 0
+Q 0
+R 101
+S 32
+T 101
+U 108
+V 111
+W 87
+X 111
+Y 114
+Z 100
