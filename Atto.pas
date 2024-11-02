@@ -53,8 +53,7 @@ begin
     'A'..'Q': GetValue := Vars[Tokens[Index][1]];
     'R'     : GetValue := Random(Vars['R']+1);
     'S'..'Z': GetValue := Byte(Vars[Tokens[Index][1]]);
-  else
-    GetValue := StrToInt(Tokens[Index]);
+  else        GetValue := StrToInt(Tokens[Index]);
   end; // case
 end;
 
@@ -97,8 +96,7 @@ begin
   while LineNum < length(Code) do
   begin
     Tokens:= SplitString(Code[LineNum],' ');    
-    Inc(LineNum);  
-                
+    Inc(LineNum);                  
     case Tokens[0] of
       'IF': begin
              if (Tokens[2][1] = '<') and (GetValue(1) < GetValue(3)) or
@@ -110,7 +108,7 @@ begin
                  'PRN': Printer(5);
                 else SetValue(4);
                 end; // case
-             end;
+             end;  // 'IF'
       'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[1]); end;
       'RET': begin
                if (stack = 0) then Error('No way to RETURN');
@@ -157,8 +155,7 @@ begin
   if Length(Labels) > 1 then
   begin
     Writeln; Writeln('----------- Label(s):');
-    for i := 1 to High(Labels) do
-      Writeln(Labels[i].Name, #9, Labels[i].Addr);
+    for i := 1 to High(Labels) do Writeln(Labels[i].Name, #9, Labels[i].Addr);
   end;
   Writeln; Writeln('----------- Variables (A..Z):');
   for i := 0 to 25 do Writeln(Chr(i + 65), ' ', Vars[Chr(i + 65)]);
