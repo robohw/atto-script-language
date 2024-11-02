@@ -25,7 +25,7 @@ type:
 analise the content of FIBONACCI.OUT  
 
 -------------------------------------------
-![](atto_logoo.gif)
+![](atto_logo.gif)
 
 
 
