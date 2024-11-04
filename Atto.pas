@@ -53,7 +53,8 @@ begin
     'A'..'Q': GetValue := Vars[Tokens[Index][1]];
     'R'     : GetValue := Random(Vars['R']+1);
     'S'..'Z': GetValue := Byte(Vars[Tokens[Index][1]]);
-  else        GetValue := StrToInt(Tokens[Index]);
+  else
+    GetValue := StrToInt(Tokens[Index]);
   end; // case
 end;
 
@@ -63,8 +64,8 @@ begin
 
   if (Tokens[n+1][1] in ['+','-']) then
   begin
-  if Tokens[n+1][1] = '+' then Vars[Tokens[n][1]] := GetValue(n) + 1;
-  if Tokens[n+1][1] = '-' then Vars[Tokens[n][1]] := GetValue(n) - 1;  
+  if Tokens[n+1][1] = '+' then Vars[Tokens[n][1]] := GetValue(n) + 1; // INCREMENT
+  if Tokens[n+1][1] = '-' then Vars[Tokens[n][1]] := GetValue(n) - 1; // DECREMENT  
   end  
   else  
   case Length(Tokens)-1 of
@@ -90,6 +91,17 @@ begin
     Write(Chr(Vars[Tokens[i][1]]));
 end;
 
+function Condition: Boolean;
+begin
+    case Tokens[2][1] of
+        '<': Condition := GetValue(1) < GetValue(3);
+        '>': Condition := GetValue(1) > GetValue(3);
+        '#': Condition := GetValue(1) <> GetValue(3); // not EQU
+        '=': Condition := GetValue(1) = GetValue(3);
+    else Error('unknown LOGIC operator'); // Nem ismert operátor
+    end;
+end;
+
 procedure ExecuteMe;
 begin
   LineNum:= 1;      
@@ -98,17 +110,12 @@ begin
     Tokens:= SplitString(Code[LineNum],' ');    
     Inc(LineNum);                  
     case Tokens[0] of
-      'IF': begin
-             if (Tokens[2][1] = '<') and (GetValue(1) < GetValue(3)) or
-                (Tokens[2][1] = '>') and (GetValue(1) > GetValue(3)) or
-                (Tokens[2][1] = '#') and (GetValue(1) <>GetValue(3)) or
-                (Tokens[2][1] = '=') and (GetValue(1) = GetValue(3)) then
+      'IF': if Condition then
                 case Tokens[4] of
                  'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[5]); end;
                  'PRN': Printer(5);
                 else SetValue(4);
                 end; // case
-             end;  // 'IF'
       'JMP': begin Stack := linenum; LineNum := GetLabelAddr(Tokens[1]); end;
       'RET': begin
                if (stack = 0) then Error('No way to RETURN');
@@ -155,7 +162,8 @@ begin
   if Length(Labels) > 1 then
   begin
     Writeln; Writeln('----------- Label(s):');
-    for i := 1 to High(Labels) do Writeln(Labels[i].Name, #9, Labels[i].Addr);
+    for i := 1 to High(Labels) do
+      Writeln(Labels[i].Name, #9, Labels[i].Addr);
   end;
   Writeln; Writeln('----------- Variables (A..Z):');
   for i := 0 to 25 do Writeln(Chr(i + 65), ' ', Vars[Chr(i + 65)]);
