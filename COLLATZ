@@ -1,0 +1,27 @@
+;  COLLATZ CONJECTURE
+; -------------------
+ 
+TRC
+
+N = 27              ; the number to examine
+T = 13              ; CR (ASCII) 
+
+JMP .LOOP           ; jump to loop
+
+.SUB
+N = N * 3
+N + 
+RET
+
+.LOOP               ; the cycle
+PRN N T             ; print the actual number and New Line
+IF N = 1 JMP .END   ; if N = 1 goto .end
+
+Q = N % 2
+IF Q = 0 N = N / 2  ; if pair, get the katana and ...
+IF Q # 0 JMP .SUB   ; if impair goto .SUB  
+JMP .LOOP           ; back to the cycle
+
+.END                ; Program ends here
+
+
