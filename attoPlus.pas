@@ -31,6 +31,7 @@ var
   Trace   : Boolean = False;
   counter : longint = 0;
   i       : integer; 
+  M       : byte = 1; 
     
 procedure PrintState;
 begin
@@ -38,6 +39,8 @@ begin
   for i := 1 to High(Code) do Writeln(i, ' ', Code[i]);
   Writeln;  Writeln('----------- Variables (A..R + S..Z (chars)):');
   for i := 0 to 25 do Writeln(Chr(i + 65), ' ', Vars[Chr(i + 65)]);
+  writeln; 
+  Writeln(M);
 end;
 
 procedure Error(const Msg: string);
@@ -69,6 +72,7 @@ begin
     'A'..'Q': GetValue := Vars[Tokens[Index][1]];
     'R'     : GetValue := Random(Vars['R']);
     'S'..'Z': GetValue := Byte(Vars[Tokens[Index][1]]);
+    '@'     : GetValue := M; 
   else
     GetValue := StrToInt(Tokens[Index]);
   end;
@@ -78,22 +82,23 @@ procedure Sugar(const n: byte);
 begin
  if tokens[n][1] in ['U'..'Z'] then Error(' Var is Char type') else
  case Tokens[n+1][1] of 
-  '+': Vars[Tokens[n][1]] := GetValue(n) + 1;
-  '-': Vars[Tokens[n][1]] := GetValue(n) - 1;
+  '+': Vars[Tokens[n][1]] := GetValue(n) + M;
+  '-': Vars[Tokens[n][1]] := GetValue(n) - M;
   '*': Vars[Tokens[n][1]] := GetValue(n) * GetValue(n);
  end;      
 end;
 
 procedure SetValue(const n: byte);
 begin
-  if (Tokens[n][1] in ['A'..'Z']) = false then Error('invalid var ID: '+Tokens[n]);
-
+  if (Tokens[n][1] in ['A'..'Z','@']) = false then Error('invalid var ID: '+Tokens[n]);
   if (Tokens[n+1][1] in ['+','-','*']) then Sugar(n) // syntactic sugar: B + equals B = B + 1
   else  
   case Length(Tokens)-1 of
-    2, 6: Vars[Tokens[n][1]] := GetValue(Length(Tokens)-1);
+    2, 6: if Tokens[n][1]= '@' then M:= byte(GetValue(Length(Tokens)-1)) else
+            Vars[Tokens[n][1]] := GetValue(Length(Tokens)-1);
     4, 8: begin
-           case Tokens[Length(Tokens) - 2][1] of
+          if Tokens[n][1]= '@' then Error('"@" cant do math. Assign NUM (1..255)  or VAR value');
+           case Tokens[Length(Tokens)-2][1] of
              '+': Vars[Tokens[n][1]] := GetValue(Length(Tokens)-3) + GetValue(Length(Tokens)-1);   
              '-': Vars[Tokens[n][1]] := GetValue(Length(Tokens)-3) - GetValue(Length(Tokens)-1);
              '*': Vars[Tokens[n][1]] := GetValue(Length(Tokens)-3) * GetValue(Length(Tokens)-1);
@@ -120,6 +125,7 @@ procedure Printer(const n: Byte);
 begin
   for i := n to High(Tokens) do if Tokens[i][1] in ['A'..'R'] then 
     Write(Vars[Tokens[i][1]]) else 
+    if (Tokens[i][1]='@') then Write(M) else 
       Write(Chr(Vars[Tokens[i][1]]));
 end;
 
