@@ -3,8 +3,8 @@
  
 TRC
 
-N = 27              ; the number to examine
-T = 13              ; CR (ASCII) 
+N = 7              ; the number to examine
+T = 10              ; CR (ASCII) 
 
 JMP .LOOP           ; jump to loop
 
