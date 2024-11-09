@@ -1,0 +1,75 @@
+Atto Interpreter User Guide
+
+Atto is a simple interpreter designed to handle basic control instructions, mathematical, and logical operations. It can be compiled with the Free Pascal compiler and is aimed at executing fundamental scripting tasks like calculating the Fibonacci or Collatz sequences.
+
+Compilation and Execution
+
+    Compilation: Use the following command to compile the program: fpc atto.pas
+
+Execution: Run the program by specifying input and output files, for example: atto.exe < FIBONACCI > FIBONACCI.OUT
+
+    The generated output file, such as FIBONACCI.OUT, will contain the results of program execution.
+
+Basic Rules
+
+    Spaces: In Atto, every element (e.g., keyword, number, variable, operator) must be separated by a space.
+        Correct: B = B + 12
+        Incorrect: B=B+12
+
+Keywords and Their Functions
+
+The Atto interpreter recognizes four keywords, each with its own function:
+
+    IF - Conditional branching
+        After IF, a logical condition must be provided. If the condition is true, the instruction following IF will execute. IF can be used with JMP, PRN, or assignment instructions.
+        Example: IF A < 10 JMP .LOOP
+        This means that if the value of variable A is less than 10, the interpreter jumps to the label .LOOP.
+
+    JMP - Jump to label
+        In addition to conditional usage with IF, JMP can be used on its own to modify the execution sequence by jumping to a specified label.
+        Example: JMP .END
+        This command jumps to the .END label in the program.
+
+    PRN - Print
+        The PRN instruction outputs the value of the specified variable. For ASCII characters (S-Z), it outputs the character, while for numeric variables (A-R), it outputs the numeric value.
+        Example: PRN A
+        This prints the current value of the variable A.
+
+    RET - Return from subroutine
+        The RET keyword is used to return control to the last location specified by a JMP statement. Primarily, this is used to exit subroutines.
+        Example: RET
+        If a subroutine is called (e.g., JMP .SUBROUTINE), RET brings execution back to where the JMP was made.
+
+Using Labels
+
+Labels are names for specific locations in the program to which jumps or subroutine calls can link. Each label begins with a . character, allowing the interpreter to navigate within the code.
+
+    Example:
+
+    A = 0
+
+    .LOOP
+    A + 
+    PRN A
+    IF A > 10 JMP .END
+    IF A < 10 JMP .LOOP
+
+    .END
+
+    Here, .LOOP and .END serve as labels marking logical sections of the program, enabling jumps and conditional branches.
+
+Mathematical and Logical Operations
+
+    Mathematical Operators: 
+    AttoPlus supports the following arithmetic operations: +, -, *, /, % (modulus).
+    Logical Operators: Conditions can use <, >, # (not equal), = operators for evaluation.
+
+Syntax Errors
+
+The Atto interpreter detects and reports syntax errors, such as poorly formatted expressions or missing spaces. This error handling facilitates development and debugging.
+
+Trace Mode
+
+A trace mode can be activated using the TRC command, which displays the current values of variables and program state. This can be useful when testing Atto scripts.
+
+This documentation provides a detailed overview of how to use the Atto interpreter, including basic functionality and error-handling capabilities, to develop and test Atto-based scripts quickly and easily.
