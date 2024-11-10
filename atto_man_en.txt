@@ -61,7 +61,7 @@ Labels are names for specific locations in the program to which jumps or subrout
 Mathematical and Logical Operations
 
     Mathematical Operators: 
-    AttoPlus supports the following arithmetic operations: +, -, *, /, % (modulus).
+    Atto supports the following arithmetic operations: +, -, *, /, % (modulus).
     Logical Operators: Conditions can use <, >, # (not equal), = operators for evaluation.
 
 Syntax Errors
@@ -73,3 +73,5 @@ Trace Mode
 A trace mode can be activated using the TRC command, which displays the current values of variables and program state. This can be useful when testing Atto scripts.
 
 This documentation provides a detailed overview of how to use the Atto interpreter, including basic functionality and error-handling capabilities, to develop and test Atto-based scripts quickly and easily.
+
+The scripts written in ATTO language are typically short, so they rarely exceed 40-50 lines. Therefore, this interpreter is not only capable of max. for running 255-line scripts. If this is not enough for you, then rewrite LineNum, Stack, Addr (TLabel), etc. type of variables to word - or, if you are more greedy - to integer.
