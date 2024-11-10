@@ -74,4 +74,4 @@ A trace mode can be activated using the TRC command, which displays the current 
 
 This documentation provides a detailed overview of how to use the Atto interpreter, including basic functionality and error-handling capabilities, to develop and test Atto-based scripts quickly and easily.
 
-The scripts written in ATTO language are typically short, so they rarely exceed 40-50 lines. Therefore, this interpreter is not only capable of max. for running 255-line scripts. If this is not enough for you, then rewrite LineNum, Stack, Addr (TLabel), etc. type of variables to word or - if you are more greedy - to integer.
+The scripts written in ATTO language are typically short, so they rarely exceed 40-50 lines. Therefore, this interpreter is  only capable of max. for running 255-line scripts. If this is not enough for you, then rewrite LineNum, Stack, Addr (TLabel), etc. type of variables to word or - if you are more greedy - to integer.
