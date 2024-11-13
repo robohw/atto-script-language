@@ -1,5 +1,5 @@
 program attoMinus; // 24.11.12
-{ Keywords: IF, JMP, PRN, RET, Math Oprtrs: + - * / % (mod), Log Oprtrs: < > =   
+{ Keywords: IF, JMP, PRN, RET, Math Oprtrs: + - * / % (mod), Log Oprtrs: < > = # (not equ)  
  Separator = ' '. In the ATTO scripts You must insert a SPACE between two language elements. 
   
   Variables (english ABC letters):  A B C D E F G H I J K L M N O P Q _R_ S T U V W X Y Z
@@ -31,7 +31,7 @@ var
   counter : longint = 0;
   i       : byte; 
   
-// ------------------------- funcs
+// ----------------------------------------- funcs
 function UpCase(str: string): string;
 begin
   UpCase := str;
@@ -72,12 +72,11 @@ begin
   StrToInt := StrToInt * sign;
 end;
 
-// -------------------------  
 procedure PrintState;
 begin
-  writeln(' '); Writeln('----------- (', Counter, ' lines done) - Code:');
+  writeln; Writeln('----------- (', Counter, ' lines done) - Code:');
   for i := 1 to High(Code) do Writeln(i, ' ', Code[i]);
-  Writeln;  Writeln('----------- Variables (A..R (nums) + S..Z (chars)):');
+  Writeln; Writeln('----------- Variables (A..R (nums) + S..Z (chars)):');
   for i := 0 to 25 do Writeln(Chr(i + 65), ' ', Vars[Chr(i + 65)]);
 end;
 
